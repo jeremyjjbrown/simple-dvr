@@ -18,13 +18,14 @@ setup(
         'Jinja2>=2.11.2',
         'click>=8.1.3',
         'eventlet>=0.33.1',
-        'flake8==3.8.4',
+        'flake8>=3.8.4',
+        'psutil>=5.9.2',
         'pytest>=6.2.1',
         'requests>=2.25.1'
     ],
     entry_points={
-    'console_scripts': [
-        'recorder = simple_dvr.recorder:cli',
-    ],
-},
+        'console_scripts': [
+            'recorder = simple_dvr.recorder:cli',
+        ],
+    },
 )
