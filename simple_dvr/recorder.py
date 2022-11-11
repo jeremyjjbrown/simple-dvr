@@ -12,6 +12,14 @@ import time
 from datetime import datetime
 
 
+def wait_until(end_datetime):
+    while True:
+        diff = (end_datetime - datetime.now()).total_seconds()
+        if diff < 0: return       # In case end_datetime was in past to begin with
+        time.sleep(diff/2)
+        if diff <= 0.1: return
+
+
 def record(url, local_filename, duration):
     with eventlet.Timeout(duration):
         try:
@@ -51,7 +59,8 @@ def cli(channel, duration, name, start):
     url = f'http://192.168.1.38:5004/auto/v{channel}?' + \
         'transcode=internet540&duration={duration}'
 
-    record_mkv(url, name, int(duration))
+    wait_until(start)
+    record(url, name, int(duration))
 
 
 if __name__ == "__main__":
